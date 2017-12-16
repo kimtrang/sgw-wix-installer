@@ -296,6 +296,9 @@ unix2dos  %STAGING%\VERSION.txt
 unix2dos  %STAGING%\LICENSE.txt
 
 echo ".................staging sgw files to wix_install dir %SGW_INSTALL_DIR%"
+mkdir %SGW_INSTALL_DIR%\examples
+mkdir %SGW_INSTALL_DIR%\tools
+
 copy  %STAGING%\README.txt     %SGW_INSTALL_DIR%\README.txt
 copy  %STAGING%\VERSION.txt    %SGW_INSTALL_DIR%\VERSION.txt
 copy  %STAGING%\LICENSE.txt    %SGW_INSTALL_DIR%\LICENSE.txt
@@ -307,6 +310,7 @@ xcopy /s %STAGING%\tools       %SGW_INSTALL_DIR%\tools
 echo  ======= start wix install  ==============================
 cd %WORKSPACE%\sgw-wix-installer
 set WIX_INSTALLER=create-installer.bat
+set VERSION=%VERSION:-=.%
 echo "Staging to wix install dir:  .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% \"%SGW_NAME%\" "
 .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "%SGW_NAME%"
 
