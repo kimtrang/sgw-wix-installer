@@ -296,13 +296,13 @@ unix2dos  %STAGING%\VERSION.txt
 unix2dos  %STAGING%\LICENSE.txt
 
 echo ".................staging sgw files to wix_install dir %SGW_INSTALL_DIR%"
-copy  %STAGING%\tools          %SGW_INSTALL_DIR%\
 copy  %STAGING%\README.txt     %SGW_INSTALL_DIR%\README.txt
 copy  %STAGING%\VERSION.txt    %SGW_INSTALL_DIR%\VERSION.txt
 copy  %STAGING%\LICENSE.txt    %SGW_INSTALL_DIR%\LICENSE.txt
 copy  %STAGING%\examples\serviceconfig.json    %SGW_INSTALL_DIR%\serviceconfig.json
 copy  %STAGING%\bin\sync_gateway.exe           %SGW_INSTALL_DIR%\sync_gateway.exe
-xcopy /s %SGW_DIR%\examples    %STAGING%\examples
+xcopy /s %STAGING%\examples    %SGW_INSTALL_DIR%\examples
+xcopy /s %STAGING%\tools       %SGW_INSTALL_DIR%\tools
 
 echo  ======= start wix install  ==============================
 cd %WORKSPACE%\sgw-wix-installer
