@@ -113,6 +113,8 @@ set SGWACCEL_INSTALL_DIR=%TARGET_DIR%\sgw_accel_install
 
 if EXIST %PREFIX%  del /s/f/q %PREFIX%
 if EXIST %STAGING% del /s/f/q %STAGING%
+if EXIST %SGW_INSTALL_DIR% del /s/f/q %SGW_INSTALL_DIR%
+if EXIST %SGWACCEL_INSTALL_DIR% del /s/f/q %SGWACCEL_INSTALL_DIR%
 
 echo ======== sync sync_gateway ===================
 
@@ -121,6 +123,9 @@ if NOT EXIST %STAGING%\bin       mkdir %STAGING%\bin
 if NOT EXIST %STAGING%\tools     mkdir %STAGING%\tools
 if NOT EXIST %STAGING%\examples  mkdir %STAGING%\examples
 if NOT EXIST %STAGING%\service   mkdir %STAGING%\service
+
+if NOT EXIST %SGW_INSTALL_DIR%           mkdir %SGW_INSTALL_DIR%
+if NOT EXIST %SGWACCEL_INSTALL_DIR%      mkdir %SGWACCEL_INSTALL_DIR%
 
 set  REPO_FILE=%WORKSPACE%\revision.bat
 if EXIST %REPO_FILE% (
@@ -299,7 +304,7 @@ copy  %STAGING%\LICENSE.txt    %SGW_INSTALL_DIR%\LICENSE.txt
 xcopy /s %SGW_DIR%\examples    %STAGING%\examples
 
 echo  ======= start wix install  ==============================
-cd sgw-wix-installer
+cd %WORKSPACE%\sgw-wix-installer
 set WIX_INSTALLER='create-installer.bat'
 echo %BLD_DIR%' => ' .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "%SGW_NAME%"
                      .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "%SGW_NAME%"
