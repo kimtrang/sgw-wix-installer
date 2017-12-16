@@ -302,6 +302,7 @@ mkdir %SGW_INSTALL_DIR%\tools
 copy  %STAGING%\README.txt     %SGW_INSTALL_DIR%\README.txt
 copy  %STAGING%\VERSION.txt    %SGW_INSTALL_DIR%\VERSION.txt
 copy  %STAGING%\LICENSE.txt    %SGW_INSTALL_DIR%\LICENSE.txt
+copy  %STAGING%\LICENSE.rtf    %SGW_INSTALL_DIR%\LICENSE.rtf
 copy  %STAGING%\examples\serviceconfig.json    %SGW_INSTALL_DIR%\serviceconfig.json
 copy  %STAGING%\bin\sync_gateway.exe           %SGW_INSTALL_DIR%\sync_gateway.exe
 xcopy /s %STAGING%\examples    %SGW_INSTALL_DIR%\examples
