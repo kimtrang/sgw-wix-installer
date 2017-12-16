@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) .NET Foundation and contributors. All rights reserved. Licensed under the Microsoft Reciprocal License. See LICENSE.TXT file in the project root for full license information. -->
+
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <UI>
+            <Dialog Id="IPSelectDialog" Width="370" Height="270" Title="IP Version Selection">
+                <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)" />
+                <Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Cancel="yes" Text="!(loc.WixUICancel)">
+                    <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>
+                </Control>
+                <Control Id="Back" Type="PushButton" X="180" Y="243" Width="56" Height="17" Text="!(loc.WixUIBack)" />
+                <Control Id="BannerBitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="44" TabSkip="no" Text="!(loc.InstallDirDlgBannerBitmap)"/>
+                <Control Id="BannerLine" Type="Line" X="0" Y="44" Width="370" Height="0"/>
+                <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="0" />
+
+                <Control Id="Title" Type="Text" X="15" Y="15" Width="300" Height="15" Transparent="yes" NoPrefix="yes" Text="{\WixUI_Font_Title}IP Version Selection" />
+                <Control Id="Description" Type="Text" X="20" Y="60" Width="280" Height="60" Transparent="yes" NoPrefix="yes" Text="Would you like to use Internet Protocol version 6 (IPv6) on this server? If you don't know, select &quot;No&quot;."/>
+                <Control Id="IPRadioButton" Type="RadioButtonGroup" X="20" Y="100" Width="280" Height="80" Property="USE_IPV6">
+                    <RadioButtonGroup Property="USE_IPV6">
+                        <RadioButton Value="true" X="0" Y="0" Width="200" Height="10" Text="Yes, use IPv6"/>
+                        <RadioButton Value="false" X="0" Y="20" Width="200" Height="10" Text="No, use IPv4"/>
+                    </RadioButtonGroup>
+                </Control>
+            </Dialog>
+        </UI>
+    </Fragment>
+</Wix>
