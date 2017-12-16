@@ -296,18 +296,19 @@ unix2dos  %STAGING%\VERSION.txt
 unix2dos  %STAGING%\LICENSE.txt
 
 echo ".................staging sgw files to wix_install dir %SGW_INSTALL_DIR%"
-copy  %STAGING%\tools\         %SGW_INSTALL_DIR%\tools\
+copy  %STAGING%\tools          %SGW_INSTALL_DIR%\
 copy  %STAGING%\README.txt     %SGW_INSTALL_DIR%\README.txt
 copy  %STAGING%\VERSION.txt    %SGW_INSTALL_DIR%\VERSION.txt
 copy  %STAGING%\LICENSE.txt    %SGW_INSTALL_DIR%\LICENSE.txt
-
+copy  %STAGING%\examples\serviceconfig.json    %SGW_INSTALL_DIR%\serviceconfig.json
+copy  %STAGING%\bin\sync_gateway.exe           %SGW_INSTALL_DIR%\sync_gateway.exe
 xcopy /s %SGW_DIR%\examples    %STAGING%\examples
 
 echo  ======= start wix install  ==============================
 cd %WORKSPACE%\sgw-wix-installer
-set WIX_INSTALLER='create-installer.bat'
-echo %BLD_DIR%' => ' .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "%SGW_NAME%"
-                     .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "%SGW_NAME%"
+set WIX_INSTALLER=create-installer.bat
+echo "Staging to wix install dir:  .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% \"%SGW_NAME%\" "
+.\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "%SGW_NAME%"
 
 if %ERRORLEVEL% NEQ 0 (
     echo "############################# Sync-Gateway Installer warning!"
