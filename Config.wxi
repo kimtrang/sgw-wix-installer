@@ -4,6 +4,6 @@
     <?define Company = "Couchbase"?>
   <?endif?>
   <?ifndef ProductName ?>
-    <?define ProductName = "Server"?>
+    <?define ProductName = "Sync-Gateway"?>
   <?endif?>
 </Include>

@@ -67,7 +67,7 @@
           <File Id="sg_windows_exe"
                 Name="sg_windows.exe"
                 KeyPath="yes"
-                Source="C:\Users\Administrator\Downloads\sg-windows.exe"/>
+                Source="sg-windows.exe"/>
           <ServiceInstall
                    Id="install_SGWService"
                    Name="SyncGateway"

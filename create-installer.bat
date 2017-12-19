@@ -3,6 +3,8 @@ set installdir=%1
 set version=%2
 set edition=%3
 set productname=%~4
+set service_dir=%5
+
 if "%productname%"=="" set productname="SGW"
 
 :: Use -ag to have light auto-generate GUIDs, as that way they'll be
@@ -22,7 +24,7 @@ candle -dVersion=%version% -dProductName="%productname%" -arch x64 -ext WixUtilE
 ::pandoc ..\LICENSE-%edition%.txt -f markdown -t rtf -s -o License.rtf
 
 :: Light it up!
-light -ext WixUIExtension -ext WixUtilExtension -b %installdir% -dWixUILicenseRtf=License.rtf -o SGW.msi *.wixobj || goto :error
+light -ext WixUIExtension -ext WixUtilExtension -b %installdir% -b %service_dir% -dWixUILicenseRtf=License.rtf -o SGW.msi *.wixobj || goto :error
 
 :end
 exit /b 0
