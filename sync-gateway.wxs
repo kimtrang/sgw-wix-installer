@@ -19,9 +19,6 @@
     <MajorUpgrade Schedule="afterInstallExecute"
         DowngradeErrorMessage="A later version of $(var.Company) $(var.ProductName) is already installed. Setup will now exit."/>
 
-    <!-- Property for selecting IPv6 or not -->
-    <Property Id="USE_IPV6" Value="false" Admin="yes" Secure="yes"/>
-
     <!-- Directory layout -->
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFiles64Folder" Name="PFiles">
@@ -133,11 +130,9 @@
       <![CDATA[Couchbase Sync Gateway is installed. Visit <a href="http://127.0.0.1:4985/">http://127.0.0.1:4985/</a> to configure the server. Please note it may take a few moments for the console to become available.]]>
     </Property>
 
-    <!-- Specify which property should be modifiable by the user in UI -->
-    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR"/>
-
     <!-- Finally load our custom UI sequence -->
-    <UIRef Id="Couchbase_UISequence"/>
+    <UIRef Id="WixUI_InstallDir" />
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
 
   </Product>
 </Wix>
