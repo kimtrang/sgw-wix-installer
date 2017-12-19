@@ -312,7 +312,7 @@ echo  ======= start wix install  ==============================
 cd %WORKSPACE%\sgw-wix-installer
 set WIX_INSTALLER=create-installer.bat
 set VERSION=%VERSION:-=.%
-echo "Staging to wix install dir:  .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% \"%SGW_NAME%\" "
+echo "Staging to wix install dir:  .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% \"%SGW_NAME%\" %WORKSPACE%\godeps\src\github.com\couchbase\sync_gateway\service\sg-windows\  "
 .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "%SGW_NAME%"
 
 if %ERRORLEVEL% NEQ 0 (
