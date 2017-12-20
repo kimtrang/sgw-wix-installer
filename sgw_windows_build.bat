@@ -75,7 +75,7 @@ set GOPLAT=%GOOS%-%GOARCH%
 set PLATFORM=%OS%-%ARCH%
 
 set PKGR=package-win.rb
-set PKGTYPE=exe
+set PKGTYPE=msi
 
 set PKG_NAME=setup_couchbase-sync-gateway_%VERSION%_%ARCHP%.%PKGTYPE%
 set NEW_PKG_NAME=couchbase-sync-gateway-%EDITION%_%VERSION%_%PARCH%.%PKGTYPE%
