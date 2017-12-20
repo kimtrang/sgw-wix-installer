@@ -314,7 +314,7 @@ cd %WORKSPACE%\sgw-wix-installer
 set WIX_INSTALLER=create-installer.bat
 set VERSION=%VERSION:-=.%
 echo "Staging to wix install dir:  .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% \"%SGW_NAME%\" %SGW_DIR%\service\sg-windows "
-.\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "%SGW_NAME%" %SGW_DIR%\service\sg-windows
+call .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "%SGW_NAME%" %SGW_DIR%\service\sg-windows
 
 if %ERRORLEVEL% NEQ 0 (
     echo "############################# Sync-Gateway Installer warning!"
@@ -322,7 +322,7 @@ if %ERRORLEVEL% NEQ 0 (
 
 echo  ======= prep sync-gateway upload ========================
 copy %STAGING%\%PKG_NAME% %SGW_DIR%\%NEW_PKG_NAME%
-move %SGW_NAME%.msi %WORKSPACE\%NEW_PKG_NAME%
+move %SGW_NAME%.msi %WORKSPACE%\%NEW_PKG_NAME%
 
 echo ======== sg-accel package step 1==========================
 set ACCEL_DIR=%TARGET_DIR%\godeps\src\github.com\couchbaselabs\sync-gateway-accel
@@ -374,7 +374,7 @@ GOTO skip_package_sg_accel
     set WIX_INSTALLER=create-installer.bat
     set VERSION=%VERSION:-=.%
     echo "Staging to wix install dir:  .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% \"%ACCEL_NAME%\" %SGW_DIR%\service\sg-windows "
-    .\%WIX_INSTALLER% %SGWACCEL_INSTALL_DIR% %VERSION% %EDITION% "%ACCEL_NAME%" %SGW_DIR%\service\sg-windows
+    call .\%WIX_INSTALLER% %SGWACCEL_INSTALL_DIR% %VERSION% %EDITION% "%ACCEL_NAME%" %SGW_DIR%\service\sg-windows
 
     if %ERRORLEVEL% NEQ 0 (
         echo "#############################  SG-ACCEL Installer warning!"
@@ -382,7 +382,7 @@ GOTO skip_package_sg_accel
 
     echo  ======= prep sg_accel upload ==============================
     copy %ACCEL_STAGING%\%ACCEL_PKG_NAME% %SGW_DIR%\%ACCEL_NEW_PKG_NAME%
-    move %ACCEL_NAME%.msi %WORKSPACE\%ACCEL_NEW_PKG_NAME%
+    move %ACCEL_NAME%.msi %WORKSPACE%\%ACCEL_NEW_PKG_NAME%
 
 :skip_package_sg_accel
 
