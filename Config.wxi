@@ -4,6 +4,11 @@
     <?define Company = "Couchbase"?>
   <?endif?>
   <?ifndef ProductName ?>
-    <?define ProductName = "Sync-Gateway"?>
+    <?define ProductName = "sync-gateway"?>
+  <?endif?>
+  <?if $(var.ProductName) = "sync-gateway"  ?>
+    <?define WinServiceApp = "sg-windows.exe" ?>
+  <?else?>
+    <?define WinServiceApp = "sg-accel-service.exe" ?>
   <?endif?>
 </Include>

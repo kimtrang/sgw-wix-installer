@@ -46,7 +46,7 @@
       <ComponentRef Id="CreateLogFolder"/>
       <ComponentRef Id="SGW_WindowService"/>
     </Feature>
-    
+
     <!-- Extra componentgroup for holding the shortcuts -->
     <SetProperty Id="CONSOLEURL" Value="http://127.0.0.1:4985/" Sequence="execute" Before="CreateShortcuts"/>
     <ComponentGroup Id="Shortcuts">
@@ -64,10 +64,10 @@
     <!-- Install SGW window service -->
     <DirectoryRef Id="ServiceSGWComponent">
         <Component Id="SGW_WindowService" Guid="68a8298e-2116-4bd0-95ec-938c07dfdb4d">
-          <File Id="sg_windows_exe"
-                Name="sg_windows.exe"
+          <File Id="sg_service_exe"
+                Name="$(var.WinServiceApp)"
                 KeyPath="yes"
-                Source="sg-windows.exe"/>
+                Source="$(var.WinServiceApp)"/>
           <ServiceInstall
                    Id="install_SGWService"
                    Name="SyncGateway"
@@ -77,7 +77,7 @@
                    ErrorControl="normal"
                    Interactive="no"
                    Type="ownProcess"
-                   Arguments='start "[INSTALLDIR]sync_gateway.exe" "[INSTALLDIR]serviceconfig.json"'
+                   Arguments='"[INSTALLDIR]sync_gateway.exe" "[INSTALLDIR]serviceconfig.json"'
                    Vital="yes">
           </ServiceInstall>
 
@@ -110,7 +110,7 @@
 
     <!-- See MB-24192. -->
     <Property Id="MSIRESTARTMANAGERCONTROL" Value="Disable"/>
-      
+
     <InstallExecuteSequence>
       <!-- Actions to do when REMOVE set, ie. Uninstall or Major Upgrade -->
     </InstallExecuteSequence>
