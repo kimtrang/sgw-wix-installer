@@ -77,7 +77,7 @@
                    ErrorControl="normal"
                    Interactive="no"
                    Type="ownProcess"
-                   Arguments='"[INSTALLDIR]sync_gateway.exe" "[INSTALLDIR]serviceconfig.json"'
+                   Arguments='start "[INSTALLDIR]sync_gateway.exe" "[INSTALLDIR]serviceconfig.json" "[INSTALLDIR]var\lib\couchbase\logs" '
                    Vital="yes">
           </ServiceInstall>
 
