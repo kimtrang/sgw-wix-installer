@@ -2,7 +2,7 @@
 ::
 ::    run by Jenkins Windows build jobs:
 ::
-::        sync_gateway_windows_builds
+::        sync_windows_build.bat SGW-2.0.0+
 ::
 ::    with required paramters:
 ::
@@ -37,9 +37,6 @@ if not defined GO_RELEASE (
 )
 
 set VERSION=%REL_VER%-%BLD_NUM%
-set LATESTBUILDS_SGW="http://latestbuilds.hq.couchbase.com/couchbase-sync-gateway/0.0.1/%REL_VER%/%VERSION%"
-if "%REL_VER%" == "0.0.0" set LATESTBUILDS_SGW="http://latestbuilds.hq.couchbase.com/couchbase-sync-gateway/%REL_VER%/%VERSION%"
-if "%REL_VER%" GEQ "1.3.0" set LATESTBUILDS_SGW="http://latestbuilds.hq.couchbase.com/couchbase-sync-gateway/%REL_VER%/%VERSION%"
 
 for /f "tokens=1-2 delims=-" %%A in ("%PLATFRM%") do (
     set OS=%%A
@@ -74,14 +71,9 @@ set ARCHP=%ARCH%
 set GOPLAT=%GOOS%-%GOARCH%
 set PLATFORM=%OS%-%ARCH%
 
-set PKGR=package-win.rb
 set PKGTYPE=msi
-
-set PKG_NAME=setup_couchbase-sync-gateway_%VERSION%_%ARCHP%.%PKGTYPE%
-set NEW_PKG_NAME=couchbase-sync-gateway-%EDITION%_%VERSION%_%PARCH%.%PKGTYPE%
-
-set ACCEL_PKG_NAME=setup_couchbase-sg-accel_%VERSION%_%ARCHP%.%PKGTYPE%
-set ACCEL_NEW_PKG_NAME=couchbase-sg-accel-%EDITION%_%VERSION%_%PARCH%.%PKGTYPE%
+set SGW_PKG_NAME=couchbase-sync-gateway-%EDITION%_%VERSION%_%PARCH%.%PKGTYPE%
+set ACCEL_PKG_NAME=couchbase-sg-accel-%EDITION%_%VERSION%_%PARCH%.%PKGTYPE%
 
 
 set GOROOT=c:\usr\local\go\%GO_RELEASE%\go
@@ -106,27 +98,22 @@ set SRC_DIR=godeps\src\github.com\couchbase\sync_gateway
 set SGW_DIR=%TARGET_DIR%\%SRC_DIR%
 set BLD_DIR=%SGW_DIR%\build
 
-set PREFIX=\opt\couchbase-sync-gateway
-set PREFIXP=.\opt\couchbase-sync-gateway
-set STAGING=%BLD_DIR%\opt\couchbase-sync-gateway
+#set STAGING=%BLD_DIR%\opt\couchbase-sync-gateway
 set SGW_INSTALL_DIR=%TARGET_DIR%\sgw_install
 set SGWACCEL_INSTALL_DIR=%TARGET_DIR%\sgw_accel_install
 
-if EXIST %PREFIX%  del /s/f/q %PREFIX%
-if EXIST %STAGING% del /s/f/q %STAGING%
 if EXIST %SGW_INSTALL_DIR% del /s/f/q %SGW_INSTALL_DIR%
 if EXIST %SGWACCEL_INSTALL_DIR% del /s/f/q %SGWACCEL_INSTALL_DIR%
 
 echo ======== sync sync_gateway ===================
 
-if NOT EXIST %STAGING%           mkdir %STAGING%
-if NOT EXIST %STAGING%\bin       mkdir %STAGING%\bin
-if NOT EXIST %STAGING%\tools     mkdir %STAGING%\tools
-if NOT EXIST %STAGING%\examples  mkdir %STAGING%\examples
-if NOT EXIST %STAGING%\service   mkdir %STAGING%\service
-
 if NOT EXIST %SGW_INSTALL_DIR%           mkdir %SGW_INSTALL_DIR%
-if NOT EXIST %SGWACCEL_INSTALL_DIR%      mkdir %SGWACCEL_INSTALL_DIR%
+if NOT EXIST %SGW_INSTALL_DIR%\tools     mkdir %SGW_INSTALL_DIR%\tools
+if NOT EXIST %SGW_INSTALL_DIR%\examples  mkdir %SGW_INSTALL_DIR%\examples
+
+if NOT EXIST %SGWACCEL_INSTALL_DIR%           mkdir %SGWACCEL_INSTALL_DIR%
+if NOT EXIST %SGWACCEL_INSTALL_DIR%\tools     mkdir %SGWACCEL_INSTALL_DIR%\tools
+if NOT EXIST %SGWACCEL_INSTALL_DIR%\examples  mkdir %SGWACCEL_INSTALL_DIR%\examples
 
 set  REPO_FILE=%WORKSPACE%\revision.bat
 if EXIST %REPO_FILE% (
@@ -175,7 +162,6 @@ if EXIST %SGW_DIR%\pkg           rmdir /s/q %SGW_DIR%\pkg
 
 echo go install github.com\couchbase\sync_gateway\...
 go install github.com\couchbase\sync_gateway\...
-::go build -v github.com\couchbase\sync_gateway
 
 if NOT EXIST %BIN_DIR%\%SGW_EXEC% (
     echo "############################# Sync-Gateway FAIL! no such file: %BIN_DIR%\%SGW_EXEC%"
@@ -184,7 +170,6 @@ if NOT EXIST %BIN_DIR%\%SGW_EXEC% (
 move   %BIN_DIR%\%SGW_EXEC% %DEST_DIR%
 echo "..................................Sync-Gateway Success! Output is: %DEST_DIR%\%SGW_EXEC%"
 
-if "%REL_VER%" == "0.0.0" GOTO build_sg_accel
 if "%REL_VER%" GEQ "1.3.0" GOTO build_sg_accel
 
 GOTO skip_build_sg_accel
@@ -239,7 +224,6 @@ set SG_SERVICED=%SGW_DIR%\service\sg-windows
 set SG_SERVICE=%SG_SERVICED%\sg-windows.exe
 set ACCEL_SERVICE=%SG_SERVICED%\sg-accel-service.exe
 
-if "%REL_VER%" == "0.0.0" GOTO build_service_wrapper
 if "%REL_VER%" GEQ "1.3.0" GOTO build_service_wrapper
 
 GOTO skip_build_service_wrapper
@@ -281,114 +265,89 @@ if EXIST %COLLECTINFO_DIST% (
 cd %CWD%
 
 echo ======== sync-gateway package ==========================
-echo ".................staging sgw files to %STAGING%"
-copy  %DEST_DIR%\%SGW_EXEC%             %STAGING%\bin\
-copy  %COLLECTINFO_DIST%                %STAGING%\tools\
-copy  %BLD_DIR%\README.txt              %STAGING%\README.txt
-echo  %VERSION%                       > %STAGING%\VERSION.txt
-copy  %LIC_DIR%\LICENSE_%EDITION%.txt   %STAGING%\LICENSE.txt
-copy  %LIC_DIR%\LICENSE_%EDITION%.rtf   %STAGING%\LICENSE.rtf
+echo ".................staging sgw files to %SGW_INSTALL_DIR%"
+copy  %DEST_DIR%\%SGW_EXEC%             %SGW_INSTALL_DIR%\sync_gateway.exe
+copy  %COLLECTINFO_DIST%                %SGW_INSTALL_DIR%\tools\
+copy  %BLD_DIR%\README.txt              %SGW_INSTALL_DIR%\README.txt
+echo  %VERSION%                       > %SGW_INSTALL_DIR%\VERSION.txt
+copy  %LIC_DIR%\LICENSE_%EDITION%.txt   %SGW_INSTALL_DIR%\LICENSE.txt
+copy  %LIC_DIR%\LICENSE_%EDITION%.rtf   %SGW_INSTALL_DIR%\LICENSE.rtf
 
-xcopy /s %SGW_DIR%\examples             %STAGING%\examples
-xcopy /s %SGW_DIR%\service              %STAGING%\service
+xcopy /s %SGW_DIR%\examples                    %SGW_INSTALL_DIR%\examples
+copy  %SGW_DIR%\examples\serviceconfig.json    %SGW_INSTALL_DIR%\serviceconfig.json
 
-unix2dos  %STAGING%\README.txt
-unix2dos  %STAGING%\VERSION.txt
-unix2dos  %STAGING%\LICENSE.txt
-
-echo ".................staging sgw files to wix_install dir %SGW_INSTALL_DIR%"
-mkdir %SGW_INSTALL_DIR%\examples
-mkdir %SGW_INSTALL_DIR%\tools
-
-copy  %STAGING%\README.txt     %SGW_INSTALL_DIR%\README.txt
-copy  %STAGING%\VERSION.txt    %SGW_INSTALL_DIR%\VERSION.txt
-copy  %STAGING%\LICENSE.txt    %SGW_INSTALL_DIR%\LICENSE.txt
-copy  %STAGING%\LICENSE.rtf    %SGW_INSTALL_DIR%\LICENSE.rtf
-copy  %STAGING%\examples\serviceconfig.json    %SGW_INSTALL_DIR%\serviceconfig.json
-copy  %STAGING%\bin\sync_gateway.exe           %SGW_INSTALL_DIR%\sync_gateway.exe
-xcopy /s %STAGING%\examples    %SGW_INSTALL_DIR%\examples
-xcopy /s %STAGING%\tools       %SGW_INSTALL_DIR%\tools
+unix2dos  %SGW_INSTALL_DIR%\README.txt
+unix2dos  %SGW_INSTALL_DIR%\VERSION.txt
+unix2dos  %SGW_INSTALL_DIR%\LICENSE.txt
+unix2dos  %SGW_INSTALL_DIR%\LICENSE.rtf
 
 echo  ======= start wix install  ==============================
 cd %WORKSPACE%\sgw-wix-installer
 set WIX_INSTALLER=create-installer.bat
 set VERSION=%VERSION:-=.%
 echo "Staging to wix install dir:  .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% \"%SGW_NAME%\" %SGW_DIR%\service\sg-windows "
-call .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "%SGW_NAME%" %SGW_DIR%\service\sg-windows
+call .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "%SGW_NAME%" %SGW_DIR%\service\sg-windows || goto :error
 
 if %ERRORLEVEL% NEQ 0 (
     echo "############################# Sync-Gateway Installer warning!"
     )
 
-echo  ======= prep sync-gateway upload ========================
-copy %STAGING%\%PKG_NAME% %SGW_DIR%\%NEW_PKG_NAME%
-move %SGW_NAME%.msi %WORKSPACE%\%NEW_PKG_NAME%
+echo  ======= prep sync-gateway msi package file: %WORKSPACE%\%SGW_PKG_NAME%  ========================
+move %SGW_NAME%.msi %WORKSPACE%\%SGW_PKG_NAME%
 
-echo ======== sg-accel package step 1==========================
-set ACCEL_DIR=%TARGET_DIR%\godeps\src\github.com\couchbaselabs\sync-gateway-accel
-set ACCEL_PREFIX=\opt\couchbase-sg-accel
-set ACCEL_PREFIXP=.\opt\couchbase-sg-accel
-set ACCEL_STAGING=%BLD_DIR%\opt\couchbase-sg-accel
-
-if "%REL_VER%" == "0.0.0" GOTO package_sg_accel
 if "%REL_VER%" GEQ "1.3.0" GOTO package_sg_accel
 
 GOTO skip_package_sg_accel
 
 :package_sg_accel
+
     if "%EDITION%" == "community" GOTO skip_package_sg_accel
 
-    cd   %BLD_DIR%
-    if EXIST %ACCEL_PREFIX%  del /s/f/q %ACCEL_PREFIX%
-    if EXIST %ACCEL_STAGING% del /s/f/q %ACCEL_STAGING%
+    set ACCEL_DIR=%TARGET_DIR%\godeps\src\github.com\couchbaselabs\sync-gateway-accel
+    #set ACCEL_STAGING=%BLD_DIR%\opt\couchbase-sg-accel
 
-    mkdir %ACCEL_STAGING%
-    xcopy /s %STAGING% %ACCEL_STAGING%
+    cd %BLD_DIR%
 
-    echo ======== sg_accel package step 2==========================
-    echo ".................staging sg_accel files to %ACCEL_STAGING%"
-    del /q %ACCEL_STAGING%\%PKG_NAME%
-    del /q %ACCEL_STAGING%\bin\%SGW_EXEC%
-    copy %DEST_DIR%\%ACCEL_EXEC%                 %ACCEL_STAGING%\bin\
+    echo ======== sg_accel package ==========================
+    echo ".................staging sg_accel files to %SGWACCEL_INSTALL_DIR%"
 
-    if "%REL_VER%" GEQ "1.4" (
-        echo ".................copy basic_sg_accel_config files to %ACCEL_STAGING%\examples"
-        copy /y %ACCEL_DIR%\examples\basic_sg_accel_config.json %ACCEL_STAGING%\examples\
-    )
+    echo ".................copy basic_sg_accel_config files to %SGW_INSTALL_DIR%\examples"
+    copy /y %ACCEL_DIR%\examples\basic_sg_accel_config.json %SGW_INSTALL_DIR%\examples\
 
     echo ".................staging sgw files to wix_install dir %SGWACCEL_INSTALL_DIR%"
     mkdir %SGWACCEL_INSTALL_DIR%\examples
     mkdir %SGWACCEL_INSTALL_DIR%\tools
 
-    copy  %ACCEL_STAGING%\README.txt     %SGWACCEL_INSTALL_DIR%\README.txt
-    copy  %ACCEL_STAGING%\VERSION.txt    %SGWACCEL_INSTALL_DIR%\VERSION.txt
-    copy  %ACCEL_STAGING%\LICENSE.txt    %SGWACCEL_INSTALL_DIR%\LICENSE.txt
-    copy  %ACCEL_STAGING%\LICENSE.rtf    %SGWACCEL_INSTALL_DIR%\LICENSE.rtf
-    copy  %ACCEL_STAGING%\examples\basic_sg_accel_config.json    %SGWACCEL_INSTALL_DIR%\basic_sg_accel_config.json
-    copy  %ACCEL_STAGING%\bin\sg_accel.exe                       %SGWACCEL_INSTALL_DIR%\sg_accel.exe
-    xcopy /s %ACCEL_STAGING%\examples    %SGWACCEL_INSTALL_DIR%\examples
-    xcopy /s %ACCEL_STAGING%\tools       %SGWACCEL_INSTALL_DIR%\tools
+    copy  %SGW_INSTALL_DIR%\README.txt     %SGWACCEL_INSTALL_DIR%\README.txt
+    copy  %SGW_INSTALL_DIR%\VERSION.txt    %SGWACCEL_INSTALL_DIR%\VERSION.txt
+    copy  %SGW_INSTALL_DIR%\LICENSE.txt    %SGWACCEL_INSTALL_DIR%\LICENSE.txt
+    copy  %SGW_INSTALL_DIR%\LICENSE.rtf    %SGWACCEL_INSTALL_DIR%\LICENSE.rtf
+    copy  %SGW_INSTALL_DIR%\examples\basic_sg_accel_config.json    %SGWACCEL_INSTALL_DIR%\basic_sg_accel_config.json
+    copy  %SGW_INSTALL_DIR%\bin\sg_accel.exe                       %SGWACCEL_INSTALL_DIR%\sg_accel.exe
+    xcopy /s %SGW_INSTALL_DIR%\examples    %SGWACCEL_INSTALL_DIR%\examples
+    xcopy /s %SGW_INSTALL_DIR%\tools       %SGWACCEL_INSTALL_DIR%\tools
 
     echo  ======= start wix install  ==============================
     cd %WORKSPACE%\sgw-wix-installer
     set WIX_INSTALLER=create-installer.bat
     set VERSION=%VERSION:-=.%
     echo "Staging to wix install dir:  .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% \"%ACCEL_NAME%\" %SGW_DIR%\service\sg-windows "
-    call .\%WIX_INSTALLER% %SGWACCEL_INSTALL_DIR% %VERSION% %EDITION% "%ACCEL_NAME%" %SGW_DIR%\service\sg-windows
+    call .\%WIX_INSTALLER% %SGWACCEL_INSTALL_DIR% %VERSION% %EDITION% "%ACCEL_NAME%" %SGW_DIR%\service\sg-windows || goto :error
 
     if %ERRORLEVEL% NEQ 0 (
         echo "#############################  SG-ACCEL Installer warning!"
         )
 
     echo  ======= prep sg_accel upload ==============================
-    copy %ACCEL_STAGING%\%ACCEL_PKG_NAME% %SGW_DIR%\%ACCEL_NEW_PKG_NAME%
     move %ACCEL_NAME%.msi %WORKSPACE%\%ACCEL_NEW_PKG_NAME%
 
 :skip_package_sg_accel
 
-echo        ........................... uploading internally to %LATESTBUILDS_SGW%
-
 echo ============================================== %DATE%
+
+:error
+@echo Previous command failed with error #%errorlevel%.
+exit /b %errorlevel%
 
 goto :EOF
 ::##########################
