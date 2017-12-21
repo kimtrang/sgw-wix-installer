@@ -323,7 +323,7 @@ GOTO skip_package_sg_accel
     copy  %SGW_INSTALL_DIR%\LICENSE.txt    %SGWACCEL_INSTALL_DIR%\LICENSE.txt
     copy  %SGW_INSTALL_DIR%\LICENSE.rtf    %SGWACCEL_INSTALL_DIR%\LICENSE.rtf
     copy  %SGW_INSTALL_DIR%\examples\basic_sg_accel_config.json    %SGWACCEL_INSTALL_DIR%\basic_sg_accel_config.json
-    copy  %SGW_INSTALL_DIR%\bin\sg_accel.exe                       %SGWACCEL_INSTALL_DIR%\sg_accel.exe
+    copy  %SGW_DIR%\bin\sg_accel.exe       %SGWACCEL_INSTALL_DIR%\sg_accel.exe
     xcopy /s %SGW_INSTALL_DIR%\examples    %SGWACCEL_INSTALL_DIR%\examples
     xcopy /s %SGW_INSTALL_DIR%\tools       %SGWACCEL_INSTALL_DIR%\tools
 
@@ -339,7 +339,7 @@ GOTO skip_package_sg_accel
         )
 
     echo  ======= prep sg_accel upload ==============================
-    move %ACCEL_NAME%.msi %WORKSPACE%\%ACCEL_NEW_PKG_NAME%
+    move %ACCEL_NAME%.msi %WORKSPACE%\%ACCEL_PKG_NAME%
 
 :skip_package_sg_accel
 
