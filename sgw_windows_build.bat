@@ -345,8 +345,8 @@ GOTO skip_package_sg_accel
     mkdir %ACCEL_STAGING%
     xcopy /s %STAGING% %ACCEL_STAGING%
 
-    echo ======== sg-accel package step 2==========================
-    echo ".................staging sg-accel files to %ACCEL_STAGING%"
+    echo ======== sg_accel package step 2==========================
+    echo ".................staging sg_accel files to %ACCEL_STAGING%"
     del /q %ACCEL_STAGING%\%PKG_NAME%
     del /q %ACCEL_STAGING%\bin\%SGW_EXEC%
     copy %DEST_DIR%\%ACCEL_EXEC%                 %ACCEL_STAGING%\bin\
@@ -356,7 +356,7 @@ GOTO skip_package_sg_accel
         copy /y %ACCEL_DIR%\examples\basic_sg_accel_config.json %ACCEL_STAGING%\examples\
     )
 
-    echo ".................staging sgw files to wix_install dir %SGW_INSTALL_DIR%"
+    echo ".................staging sgw files to wix_install dir %SGWACCEL_INSTALL_DIR%"
     mkdir %SGWACCEL_INSTALL_DIR%\examples
     mkdir %SGWACCEL_INSTALL_DIR%\tools
 
@@ -365,7 +365,7 @@ GOTO skip_package_sg_accel
     copy  %STAGING%\LICENSE.txt    %SGWACCEL_INSTALL_DIR%\LICENSE.txt
     copy  %STAGING%\LICENSE.rtf    %SGWACCEL_INSTALL_DIR%\LICENSE.rtf
     copy  %STAGING%\examples\basic_sg_accel_config.json    %SGWACCEL_INSTALL_DIR%\basic_sg_accel_config.json
-    copy  %STAGING%\bin\sg-accel.exe                       %SGWACCEL_INSTALL_DIR%\sg-accel.exe
+    copy  %STAGING%\bin\sg_accel.exe                       %SGWACCEL_INSTALL_DIR%\sg_accel.exe
     xcopy /s %STAGING%\examples    %SGWACCEL_INSTALL_DIR%\examples
     xcopy /s %STAGING%\tools       %SGWACCEL_INSTALL_DIR%\tools
 
