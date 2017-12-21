@@ -360,14 +360,14 @@ GOTO skip_package_sg_accel
     mkdir %SGWACCEL_INSTALL_DIR%\examples
     mkdir %SGWACCEL_INSTALL_DIR%\tools
 
-    copy  %STAGING%\README.txt     %SGWACCEL_INSTALL_DIR%\README.txt
-    copy  %STAGING%\VERSION.txt    %SGWACCEL_INSTALL_DIR%\VERSION.txt
-    copy  %STAGING%\LICENSE.txt    %SGWACCEL_INSTALL_DIR%\LICENSE.txt
-    copy  %STAGING%\LICENSE.rtf    %SGWACCEL_INSTALL_DIR%\LICENSE.rtf
-    copy  %STAGING%\examples\basic_sg_accel_config.json    %SGWACCEL_INSTALL_DIR%\basic_sg_accel_config.json
-    copy  %STAGING%\bin\sg_accel.exe                       %SGWACCEL_INSTALL_DIR%\sg_accel.exe
-    xcopy /s %STAGING%\examples    %SGWACCEL_INSTALL_DIR%\examples
-    xcopy /s %STAGING%\tools       %SGWACCEL_INSTALL_DIR%\tools
+    copy  %ACCEL_STAGING%\README.txt     %SGWACCEL_INSTALL_DIR%\README.txt
+    copy  %ACCEL_STAGING%\VERSION.txt    %SGWACCEL_INSTALL_DIR%\VERSION.txt
+    copy  %ACCEL_STAGING%\LICENSE.txt    %SGWACCEL_INSTALL_DIR%\LICENSE.txt
+    copy  %ACCEL_STAGING%\LICENSE.rtf    %SGWACCEL_INSTALL_DIR%\LICENSE.rtf
+    copy  %ACCEL_STAGING%\examples\basic_sg_accel_config.json    %SGWACCEL_INSTALL_DIR%\basic_sg_accel_config.json
+    copy  %ACCEL_STAGING%\bin\sg_accel.exe                       %SGWACCEL_INSTALL_DIR%\sg_accel.exe
+    xcopy /s %ACCEL_STAGING%\examples    %SGWACCEL_INSTALL_DIR%\examples
+    xcopy /s %ACCEL_STAGING%\tools       %SGWACCEL_INSTALL_DIR%\tools
 
     echo  ======= start wix install  ==============================
     cd %WORKSPACE%\sgw-wix-installer
