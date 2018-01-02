@@ -82,7 +82,7 @@
           </ServiceInstall>
 
           <ServiceControl Id="sc_SGWService"
-                          Start="install"
+                          Start="$(var.WinServiceControl)"
                           Stop="both"
                           Remove="uninstall"
                           Name="SyncGateway"
