@@ -72,7 +72,8 @@
                    Id="install_SGWService"
                    Name="SyncGateway"
                    DisplayName="Couchbase Sync Gateway"
-                   Description="Couchbase Sync Gateway mobile application REST gateway service." Start="demand"
+                   Description="Couchbase Sync Gateway mobile application REST gateway service."
+                   Start="$(var.WinServiceControl)"
                    Account="NT AUTHORITY\LocalService"
                    ErrorControl="normal"
                    Interactive="no"
@@ -82,7 +83,7 @@
           </ServiceInstall>
 
           <ServiceControl Id="sc_SGWService"
-                          Start="$(var.WinServiceControl)"
+                          Start="install"
                           Stop="both"
                           Remove="uninstall"
                           Name="SyncGateway"

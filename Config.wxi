@@ -10,7 +10,7 @@
     <?define WinServiceApp = "sg-windows.exe" ?>
     <?define WinSGWEXE = "sync_gateway.exe" ?>
     <?define WinServiceConfig = "serviceconfig.json" ?>
-    <?define WinServiceControl = "install" ?>
+    <?define WinServiceControl = "auto" ?>
   <?else?>
     <?define WinServiceApp = "sg-accel-service.exe" ?>
     <?define WinSGWEXE = "sg_accel.exe" ?>
