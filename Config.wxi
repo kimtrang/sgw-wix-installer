@@ -10,9 +10,11 @@
     <?define WinServiceApp = "sg-windows.exe" ?>
     <?define WinSGWEXE = "sync_gateway.exe" ?>
     <?define WinServiceConfig = "serviceconfig.json" ?>
+    <?define WinServiceControl = "install" ?>
   <?else?>
     <?define WinServiceApp = "sg-accel-service.exe" ?>
     <?define WinSGWEXE = "sg_accel.exe" ?>
     <?define WinServiceConfig = "basic_sg_accel_config.json" ?>
+    <?define WinServiceControl = "demand" ?>
   <?endif?>
 </Include>
