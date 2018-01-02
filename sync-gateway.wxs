@@ -62,8 +62,10 @@
     </ComponentGroup>
 
     <!-- Install SGW window service -->
+    <!-- sync-gateway service with auto start on install -->
     <DirectoryRef Id="ServiceSGWComponent">
         <Component Id="SGW_WindowService" Guid="68a8298e-2116-4bd0-95ec-938c07dfdb4d">
+          <condition>$(var.ProductName)="sync-gateway"></condition>
           <File Id="sg_service_exe"
                 Name="$(var.WinServiceApp)"
                 KeyPath="yes"
@@ -82,13 +84,13 @@
                    Vital="yes">
           </ServiceInstall>
 
-          <ServiceControl Id="sc_SGWService"
-                          Start="install"
-                          Stop="both"
-                          Remove="uninstall"
-                          Name="SyncGateway"
-                          Wait="yes">
+        <?if $(var.ProductName) = "sync-gateway" ?>
+          <ServiceControl Id="sc_SGWService" Start="install" Stop="both" Remove="uninstall" Name="SyncGateway" Wait="yes">
           </ServiceControl>
+        <?else?>
+          <ServiceControl Id="sc_SGWService" Stop="both" Remove="uninstall" Name="SyncGateway" Wait="yes">
+          </ServiceControl>
+        <?endif?>
         </Component>
     </DirectoryRef>
 

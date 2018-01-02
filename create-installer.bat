@@ -2,7 +2,7 @@ setlocal
 set installdir=%1
 set version=%2
 set edition=%3
-set productname=%~4
+set productname=%4
 set service_dir=%5
 
 if "%productname%"=="" set productname="SGW"
