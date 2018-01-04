@@ -9,7 +9,7 @@
   <?ifndef UpgradeCodeID ?>
     <?define UpgradeCodeID = "5E6FC699-4DCB-C674-3991-0B7EFC1B3FFD" ?>
   <?endif?>
-  <?if $(var.ProductName) = "Sync Gateway"  ?>
+  <?if $(var.ProductName) = "sync-gateway"  ?>
     <?define Name = "SyncGateway" ?>
     <?define DisplayName = "Couchbase Sync Gateway" ?>
     <?define Description = "Couchbase Sync Gateway mobile application REST gateway service." ?>
