@@ -83,11 +83,11 @@
                    Vital="yes">
           </ServiceInstall>
 
-        <?if $(var.ProductName) = "sync-gateway" ?>
-          <ServiceControl Id="sc_SGWService" Start="install" Stop="both" Remove="uninstall" Name="SyncGateway" Wait="yes">
+        <?if $(var.ProductName) = "Sync Gateway" ?>
+          <ServiceControl Id="sc_SGWService" Start="install" Stop="both" Remove="uninstall" Name="sync-gateway" Wait="yes">
           </ServiceControl>
         <?else?>
-          <ServiceControl Id="sc_SGWService" Stop="both" Remove="uninstall" Name="SyncGateway" Wait="yes">
+          <ServiceControl Id="sc_SGWService" Stop="both" Remove="uninstall" Name="sg-accel" Wait="yes">
           </ServiceControl>
         <?endif?>
         </Component>
