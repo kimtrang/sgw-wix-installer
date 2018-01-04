@@ -33,7 +33,7 @@ set  REPO_SHA=%6
 set  GO_RELEASE=%7
 
 if not defined GO_RELEASE (
-    set GO_RELEASE=1.5.3
+    set GO_RELEASE=1.9.2
 )
 
 set VERSION=%REL_VER%-%BLD_NUM%
@@ -301,7 +301,7 @@ echo  ======= start wix install  ==============================
 cd %WORKSPACE%\sgw-wix-installer
 set WIX_INSTALLER=create-installer.bat
 set VERSION=%VERSION:-=.%
-echo "Staging to wix install dir:  .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% \"%SGW_NAME%\" %SGW_DIR%\service\sg-windows "
+echo "Staging to wix install dir:  .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "Sync Gateway" %SGW_DIR%\service\sg-windows "
 call .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "%SGW_NAME%" %SGW_DIR%\service\sg-windows || goto :error
 
 if %ERRORLEVEL% NEQ 0 (
@@ -347,7 +347,7 @@ GOTO skip_package_sg_accel
     cd %WORKSPACE%\sgw-wix-installer
     set WIX_INSTALLER=create-installer.bat
     set VERSION=%VERSION:-=.%
-    echo "Staging to wix install dir:  .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% \"%ACCEL_NAME%\" %SGW_DIR%\service\sg-windows "
+    echo "Staging to wix install dir:  .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "Sync Gateway Accelerator" %SGW_DIR%\service\sg-windows "
     call .\%WIX_INSTALLER% %SGWACCEL_INSTALL_DIR% %VERSION% %EDITION% "%ACCEL_NAME%" %SGW_DIR%\service\sg-windows || goto :error
 
     if %ERRORLEVEL% NEQ 0 (

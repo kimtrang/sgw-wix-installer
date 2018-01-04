@@ -4,14 +4,23 @@
     <?define Company = "Couchbase"?>
   <?endif?>
   <?ifndef ProductName ?>
-    <?define ProductName = "sync-gateway"?>
+    <?define ProductName = "Sync Gateway"?>
   <?endif?>
-  <?if $(var.ProductName) = "sync-gateway"  ?>
+  <?ifndef UpgradeCodeID ?>
+    <?define UpgradeCodeID = "5E6FC699-4DCB-C674-3991-0B7EFC1B3FFD" ?>
+  <?endif?>
+  <?if $(var.ProductName) = "Sync Gateway"  ?>
     <?define WinServiceApp = "sg-windows.exe" ?>
     <?define WinSGWEXE = "sync_gateway.exe" ?>
     <?define WinServiceConfig = "serviceconfig.json" ?>
     <?define WinServiceControl = "auto" ?>
+    <?define Name = "SyncGateway" ?>
+    <?define DisplayName = "Couchbase Sync Gateway" ?>
+    <?define Description = "Couchbase Sync Gateway mobile application REST gateway service." ?>
   <?else?>
+    <?define Name = "SGAccel" ?>
+    <?define DisplayName = "Couchbase Sync Gateway Accelerator" ?>
+    <?define Description = "Couchbase Sync Gateway Accelerator performance and scalability service." ?>
     <?define WinServiceApp = "sg-accel-service.exe" ?>
     <?define WinSGWEXE = "sg_accel.exe" ?>
     <?define WinServiceConfig = "basic_sg_accel_config.json" ?>

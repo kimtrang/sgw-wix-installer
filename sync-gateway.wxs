@@ -4,7 +4,7 @@
 
   <?include $(sys.CURRENTDIR)\Config.wxi?>
   <Product Id="*" Name="$(var.Company) $(var.ProductName)" Version="$(var.Version)" Manufacturer="Couchbase Inc."
-      UpgradeCode="01510917-D2BC-91D4-FD65-4743E498A007"
+      UpgradeCode="$(var.UpgradeCodeID)"
       Language="1033" Codepage="1252">
 
     <Package Id="*" Keywords="Installer" Description="$(var.Company) $(var.ProductName) $(var.Version) Installer"
@@ -71,9 +71,9 @@
                 Source="$(var.WinServiceApp)"/>
           <ServiceInstall
                    Id="install_SGWService"
-                   Name="SyncGateway"
-                   DisplayName="Couchbase Sync Gateway"
-                   Description="Couchbase Sync Gateway mobile application REST gateway service."
+                   Name="$(var.Name)"
+                   DisplayName="$(var.DisplayName)"
+                   Description="$(var.Description)"
                    Start="$(var.WinServiceControl)"
                    Account="NT AUTHORITY\LocalService"
                    ErrorControl="normal"
