@@ -98,7 +98,6 @@ set SRC_DIR=godeps\src\github.com\couchbase\sync_gateway
 set SGW_DIR=%TARGET_DIR%\%SRC_DIR%
 set BLD_DIR=%SGW_DIR%\build
 
-#set STAGING=%BLD_DIR%\opt\couchbase-sync-gateway
 set SGW_INSTALL_DIR=%TARGET_DIR%\sgw_install
 set SGWACCEL_INSTALL_DIR=%TARGET_DIR%\sgw_accel_install
 
@@ -219,21 +218,21 @@ GOTO skip_build_sg_accel
 echo ======== remove build meta-data ==============
 move  %TEMPLATE_FILE%.orig  %TEMPLATE_FILE%
 
-#echo ======== test ================================
-#echo ................... running unit tests
-#echo ................... test options: %TEST_OPTIONS%
-#if %TEST_OPTIONS% == "None" (
-#    echo go test github.com\couchbase\sync_gateway\...
-#    go test github.com\couchbase\sync_gateway\...
-#) else (
-#    echo go test %TEST_OPTIONS:"=% github.com\couchbase\sync_gateway\...
-#    go test %TEST_OPTIONS:"=% github.com\couchbase\sync_gateway\...
-#)
+::echo ======== test ================================
+::echo ................... running unit tests
+::echo ................... test options: %TEST_OPTIONS%
+::if %TEST_OPTIONS% == "None" (
+::    echo go test github.com\couchbase\sync_gateway\...
+::    go test github.com\couchbase\sync_gateway\...
+::) else (
+::    echo go test %TEST_OPTIONS:"=% github.com\couchbase\sync_gateway\...
+::    go test %TEST_OPTIONS:"=% github.com\couchbase\sync_gateway\...
+::)
 
-#if %ERRORLEVEL% NEQ 0 (
-#    echo "########################### FAIL! Unit test results = %ERRORLEVEL%"
-#    exit 1
-#)
+::if %ERRORLEVEL% NEQ 0 (
+::    echo "########################### FAIL! Unit test results = %ERRORLEVEL%"
+::    exit 1
+::)
 
 echo ======== build service wrappers ==============
 set SG_SERVICED=%SGW_DIR%\service\sg-windows
@@ -355,7 +354,7 @@ GOTO skip_package_sg_accel
         )
 
     echo  ======= prep sg_accel upload ==============================
-    move %ACCEL_NAME%.msi %WORKSPACE%\%ACCEL_PKG_NAME%
+    move sync-gateway-accel.msi %WORKSPACE%\%ACCEL_PKG_NAME%
 
 :skip_package_sg_accel
 
