@@ -4,7 +4,7 @@
     <?define Company = "Couchbase"?>
   <?endif?>
   <?ifndef ProductName ?>
-    <?define ProductName = "Sync Gateway"?>
+    <?define ProductName = "SyncGateway"?>
   <?endif?>
   <?ifndef UpgradeCodeID ?>
     <?define UpgradeCodeID = "5E6FC699-4DCB-C674-3991-0B7EFC1B3FFD" ?>

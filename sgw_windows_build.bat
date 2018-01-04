@@ -301,8 +301,8 @@ echo  ======= start wix install  ==============================
 cd %WORKSPACE%\sgw-wix-installer
 set WIX_INSTALLER=create-installer.bat
 set VERSION=%VERSION:-=.%
-echo "Staging to wix install dir:  .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "Sync Gateway" %SGW_DIR%\service\sg-windows "
-call .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "Sync Gateway" %SGW_DIR%\service\sg-windows || goto :error
+echo "Staging to wix install dir:  .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "%SGW_NAME%" %SGW_DIR%\service\sg-windows "
+call .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "%SGW_NAME%" %SGW_DIR%\service\sg-windows || goto :error
 
 if %ERRORLEVEL% NEQ 0 (
     echo "############################# Sync-Gateway Installer warning!"
@@ -347,8 +347,8 @@ GOTO skip_package_sg_accel
     cd %WORKSPACE%\sgw-wix-installer
     set WIX_INSTALLER=create-installer.bat
     set VERSION=%VERSION:-=.%
-    echo "Staging to wix install dir:  .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "Sync Gateway Accelerator" %SGW_DIR%\service\sg-windows "
-    call .\%WIX_INSTALLER% %SGWACCEL_INSTALL_DIR% %VERSION% %EDITION% "Sync Gateway Accelerator" %SGW_DIR%\service\sg-windows || goto :error
+    echo "Staging to wix install dir:  .\%WIX_INSTALLER% %SGW_INSTALL_DIR% %VERSION% %EDITION% "sync-gateway-accel" %SGW_DIR%\service\sg-windows "
+    call .\%WIX_INSTALLER% %SGWACCEL_INSTALL_DIR% %VERSION% %EDITION% "sync-gateway-accel" %SGW_DIR%\service\sg-windows || goto :error
 
     if %ERRORLEVEL% NEQ 0 (
         echo "#############################  SG-ACCEL Installer warning!"
