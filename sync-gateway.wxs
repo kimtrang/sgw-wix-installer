@@ -3,7 +3,7 @@
      xmlns:util='http://schemas.microsoft.com/wix/UtilExtension'>
 
   <?include $(sys.CURRENTDIR)\Config.wxi?>
-  <Product Id="*" Name="$(var.Company) $(var.ProductName)" Version="$(var.Version)" Manufacturer="Couchbase Inc."
+  <Product Id="*" Name="$(var.DisplayName)" Version="$(var.Version)" Manufacturer="Couchbase Inc."
       UpgradeCode="$(var.UpgradeCodeID)"
       Language="1033" Codepage="1252">
 
@@ -16,8 +16,15 @@
     <Media Id="1" Cabinet="Couchbase.cab" EmbedCab="yes" DiskPrompt="Only file"/>
     <Property Id="DiskPrompt" Value="$(var.Company) $(var.ProductName) $(var.Version) Installation [1]"/>
 
+    <!-- Enable Windows Installer "major upgrade", the uninstall/install kind. -->
+    <!-- The Schedule attribute specifies where RemoveExistingProducts will go; -->
+    <!-- see https://msdn.microsoft.com/library/aa371197.aspx for details. -->
+    <!-- afterInstallExecute seems to be most efficient and also (probably?) -->
+    <!-- allows for user-modified config files to remain. -->
     <MajorUpgrade Schedule="afterInstallExecute"
         DowngradeErrorMessage="A later version of $(var.Company) $(var.ProductName) is already installed. Setup will now exit."/>
+    <!-- Store the installation directory so upgrades can re-use it -->
+    <SetProperty Id="ARPINSTALLLOCATION" Value="[INSTALLDIR]" After="CostFinalize" Sequence="execute"/>
 
     <!-- Directory layout -->
     <Directory Id="TARGETDIR" Name="SourceDir">
