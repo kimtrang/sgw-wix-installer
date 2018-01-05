@@ -75,7 +75,7 @@
                    DisplayName="$(var.DisplayName)"
                    Description="$(var.Description)"
                    Start="$(var.WinServiceControl)"
-                   Account="NT AUTHORITY\LocalService"
+                   Account="LocalSystem"
                    ErrorControl="normal"
                    Interactive="no"
                    Type="ownProcess"
