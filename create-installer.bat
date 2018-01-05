@@ -25,7 +25,7 @@ candle -dVersion=%version% -dProductName="%productname%" -arch x64 -ext WixUtilE
 
 :: Light it up!
 echo SERVICE_DIR: %service_dir%
-#light -ext WixUIExtension -ext WixUtilExtension -b %installdir% -b %service_dir% -dWixUILicenseRtf=License.rtf -o %productname%.msi *.wixobj || goto :error
+::light -ext WixUIExtension -ext WixUtilExtension -b %installdir% -b %service_dir% -dWixUILicenseRtf=License.rtf -o %productname%.msi *.wixobj || goto :error
 light -ext WixUIExtension -ext WixUtilExtension -b %installdir% -b %service_dir% -o %productname%.msi *.wixobj || goto :error
 
 :end
