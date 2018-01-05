@@ -6,9 +6,6 @@
   <?ifndef ProductName ?>
     <?define ProductName = "sync-gateway"?>
   <?endif?>
-  <?ifndef UpgradeCodeID ?>
-    <?define UpgradeCodeID = "5E6FC699-4DCB-C674-3991-0B7EFC1B3FFD" ?>
-  <?endif?>
   <?if $(var.ProductName) = "sync-gateway"  ?>
     <?define Name = "SyncGateway" ?>
     <?define DisplayName = "Couchbase Sync Gateway" ?>
