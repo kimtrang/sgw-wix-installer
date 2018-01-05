@@ -132,7 +132,10 @@
     <Property Id="ARPURLINFOABOUT" Value="http://www.couchbase.com/"/>
 
     <!-- Graphics for installer itself -->
+    <UIRef Id="WixUI_Minimal"/>
     <WixVariable Id="WixUIDialogBmp" Value="$(sys.CURRENTDIR)\assets\cb_installer_bg.jpg"/>
+    <WixVariable Id="WixUIBannerBmp" Value="$(sys.CURRENTDIR)\assets\couchbase.ico"/>
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf"/>
 
     <!-- Text message for our custom exit dialog -->
     <Property Id="HYPERLINK_EXITDIALOGOPTIONALTEXT">
