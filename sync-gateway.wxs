@@ -133,13 +133,10 @@
 
     <!-- Graphics for installer itself -->
     <WixVariable Id="WixUIDialogBmp" Value="$(sys.CURRENTDIR)\assets\cb_installer_bg.jpg"/>
-    <WixVariable Id="WixUIBannerBmp" Value="$(sys.CURRENTDIR)\assets\couchbase.ico"/>
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf"/>
 
-    <!-- Text message for our custom exit dialog -->
-    <Property Id="HYPERLINK_EXITDIALOGOPTIONALTEXT">
-      <![CDATA[Couchbase Sync Gateway is installed. Visit <a href="http://127.0.0.1:4985/">http://127.0.0.1:4985/</a> to configure the server. Please note it may take a few moments for the console to become available.]]>
-    </Property>
+    <!-- Text message for exit dialog -->
+    <Property Id="WIXUI_EXITDIALOGOPTIONALTEXT" Value="Couchbase Sync Gateway is installed. Visit <a href="http://127.0.0.1:4985/">http://127.0.0.1:4985/</a> to configure the server. Please note it may take a few moments for the console to become available." />
 
     <!-- Finally load our custom UI sequence -->
     <UIRef Id="WixUI_InstallDir" />
