@@ -169,9 +169,7 @@ if NOT EXIST %BIN_DIR%\%SGW_EXEC% (
 move   %BIN_DIR%\%SGW_EXEC% %DEST_DIR%
 echo "..................................Sync-Gateway Success! Output is: %DEST_DIR%\%SGW_EXEC%"
 
-if "%REL_VER%" GEQ "1.3.0" GOTO build_sg_accel
-
-GOTO skip_build_sg_accel
+GOTO build_sg_accel
 
 :build_sg_accel
 
@@ -239,9 +237,7 @@ set SG_SERVICED=%SGW_DIR%\service\sg-windows
 set SG_SERVICE=%SG_SERVICED%\sg-windows.exe
 set ACCEL_SERVICE=%SG_SERVICED%\sg-accel-service.exe
 
-if "%REL_VER%" GEQ "1.3.0" GOTO build_service_wrapper
-
-GOTO skip_build_service_wrapper
+GOTO build_service_wrapper
 
 :build_service_wrapper
     cd %SG_SERVICED%
@@ -262,7 +258,6 @@ GOTO skip_build_service_wrapper
         exit 1
     )
 
-:skip_build_service_wrapper
 
 echo ======== build sgcollect_info ===============================
 set COLLECTINFO_DIR=%SGW_DIR%\tools
@@ -310,9 +305,7 @@ if %ERRORLEVEL% NEQ 0 (
 echo  ======= prep sync-gateway msi package file: %WORKSPACE%\%SGW_PKG_NAME%  ========================
 move %SGW_NAME%.msi %WORKSPACE%\%SGW_PKG_NAME%
 
-if "%REL_VER%" GEQ "1.3.0" GOTO package_sg_accel
-
-GOTO skip_package_sg_accel
+GOTO package_sg_accel
 
 :package_sg_accel
 
