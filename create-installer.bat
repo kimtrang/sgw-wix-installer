@@ -9,6 +9,7 @@ if "%productname%"=="" set productname="SGW"
 
 :: Use -ag to have light auto-generate GUIDs, as that way they'll be
 :: based on full filename and therefore consistent from build to build.
+:: -t wix_exclude.xlst to exclude files from msi package
 heat dir %installdir% -srd -suid -ag -sreg -ke -cg SyncGateway -dr INSTALLDIR -out Files.wxs -t wix_exclude.xlst || goto :error
 
 :: Unfortunately -ag and -ke don't work together - it generates an
@@ -25,7 +26,6 @@ candle -dVersion=%version% -dProductName="%productname%" -arch x64 -ext WixUtilE
 
 :: Light it up!
 echo SERVICE_DIR: %service_dir%
-::light -ext WixUIExtension -ext WixUtilExtension -b %installdir% -b %service_dir% -dWixUILicenseRtf=License.rtf -o %productname%.msi *.wixobj || goto :error
 light -ext WixUIExtension -ext WixUtilExtension -b %installdir% -b %service_dir% -o %productname%.msi *.wixobj || goto :error
 
 :end
