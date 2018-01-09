@@ -19,7 +19,7 @@ heat dir %installdir% -srd -suid -ag -sreg -ke -cg SyncGateway -dr INSTALLDIR -o
 
 :: Compile .wxs files to intermediate objects, specifying version
 ::candle -dVersion=%version% -dProductName="%productname%" -arch x64 -ext WixUtilExtension *.wxs || goto :error
-candle -dVersion="2.0.1.729" -dProductName="%productname%" -arch x64 -ext WixUtilExtension *.wxs || goto :error
+candle -dVersion="2.0.1.731" -dProductName="%productname%" -arch x64 -ext WixUtilExtension *.wxs || goto :error
 
 :: Create RTF version of License file - our license text is close enough
 :: to Markdown to pass
