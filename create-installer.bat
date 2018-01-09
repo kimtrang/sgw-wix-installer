@@ -9,8 +9,8 @@ if "%productname%"=="" set productname="SGW"
 
 :: Use -ag to have light auto-generate GUIDs, as that way they'll be
 :: based on full filename and therefore consistent from build to build.
-:: -t wix_exclude.xlst to exclude files from msi package
-heat dir %installdir% -srd -suid -ag -sreg -ke -cg SyncGateway -dr INSTALLDIR -out Files.wxs -t wix_exclude.xlst || goto :error
+:: -t wix-exclude.xlst to exclude files from msi package
+heat dir %installdir% -srd -suid -ag -sreg -ke -cg SyncGateway -dr INSTALLDIR -out Files.wxs -t wix-exclude.xlst || goto :error
 
 :: Unfortunately -ag and -ke don't work together - it generates an
 :: illegal .wxs. Post-process here to provide random GUIDs for empty
