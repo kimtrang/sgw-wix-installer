@@ -40,10 +40,9 @@
         <DirectorySearch Path="C:\Program Files (x86)\Couchbase\var\lib\couchbase\logs"
                    Depth="0"
                    AssignToProperty="yes"
-                   Id="couchbase_logs_exist"
-                   Win64="NO" />
+                   Id="couchbase_logs_exist" />
     </Property>
-    <Condition Message="An older version of Couchbase Sync Gateway has been detected on your computer. To complete the installation of this version, please uninstall your older version before you continue.">COUCHBASE_LOGS_EXISTS OR SYNC_GATEWAY_1X_EXISTS</Condition>  -->
+    <Condition Message="An older version of Couchbase Sync Gateway has been detected on your computer. To complete the installation of this version, please uninstall your older version before you continue.">COUCHBASE_LOGS_EXISTS OR SYNC_GATEWAY_1X_EXISTS</Condition>
 
 
     <!-- Enable Windows Installer "major upgrade", the uninstall/install kind. -->
