@@ -20,8 +20,8 @@
     <Property Id="SYNC_GATEWAY_1X_EXISTS">
         <RegistrySearch Id="Sync_Gateway_1X_exist"
                   Root="HKLM"
-                  Key="SOFTWARE\Classes\Installer"
-                  Name="Couchbase Sync Gateway"
+                  Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\UserData"
+                  Name="sync_gateway.exe"
                   Type="raw" />
     </Property>
 
