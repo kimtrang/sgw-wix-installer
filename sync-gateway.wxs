@@ -67,7 +67,6 @@
     <Feature Id="Complete" Level="1" Title="Couchbase Server" Description="The Complete Package."
         ConfigurableDirectory="INSTALLDIR">
       <ComponentGroupRef Id="SyncGateway"/>
-      <ComponentGroupRef Id="Shortcuts"/>
       <ComponentRef Id="CreateLogFolder"/>
       <ComponentRef Id="SGW_WindowService"/>
     </Feature>
