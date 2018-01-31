@@ -32,7 +32,7 @@
     </Property>
     <!-- option to bypass check of previous version of SGW installation -->
     <Condition Message="An older version of Couchbase Sync Gateway has been detected on your computer. To complete the installation of this version, please uninstall your older version before you continue.">
-    <![CDATA[SYNC_GATEWAY_NAME_1X_EXISTS = "Couchbase Sync Gateway" AND (SYNC_GATEWAY_VERSION_1X_EXISTS = "1040002" OR SYNC_GATEWAY_VERSION_1X_EXISTS = "1050001")]]>
+    <![CDATA[SYNC_GATEWAY_NAME_1X_EXISTS]]>
     </Condition>
 
     <!--<Property Id="IGNORE_OLD_SGW_VERSION" Value="false"/>
