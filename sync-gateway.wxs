@@ -69,6 +69,7 @@
       <ComponentGroupRef Id="SyncGateway"/>
       <ComponentRef Id="CreateLogFolder"/>
       <ComponentRef Id="SGW_WindowService"/>
+      <ComponentRef Id="Shortcuts"/>
     </Feature>
 
     <!-- Desktop shortcut -->
