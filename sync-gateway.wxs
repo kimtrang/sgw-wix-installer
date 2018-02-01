@@ -18,8 +18,8 @@
     <!-- Check if 1.x previously install -->
     <Property Id="SYNC_GATEWAY_NAME_1X_EXISTS">
         <RegistrySearch Id="Sync_Gateway_name_1X_exist"
-                  Root="HKCR"
-                  Key="Installer\Products\75E3CA1D72467484D8075AB630073F8A"
+                  Root="HKLM"
+                  Key="SOFTWARE\Classes\Installer\Products\75E3CA1D72467484D8075AB630073F8A"
                   Name="ProductName"
                   Type="raw" />
     </Property>
