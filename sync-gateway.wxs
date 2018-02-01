@@ -19,7 +19,7 @@
     <Property Id="SYNC_GATEWAY_NAME_1X_EXISTS">
         <RegistrySearch Id="Sync_Gateway_name_1X_exist"
                   Root="HKCR"
-                  Key="SOFTWARE\Installer\Products\D1AC3E57-6427-4847-8D70-A56B0370F3A8"
+                  Key="Installer\Products\D1AC3E57-6427-4847-8D70-A56B0370F3A8"
                   Name="ProductName"
                   Type="raw" />
     </Property>
