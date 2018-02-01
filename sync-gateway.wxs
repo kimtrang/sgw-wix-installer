@@ -19,14 +19,14 @@
     <Property Id="SYNC_GATEWAY_NAME_1X_EXISTS">
         <RegistrySearch Id="Sync_Gateway_name_1X_exist"
                   Root="HKCR"
-                  Key="Installer\Products\D1AC3E57-6427-4847-8D70-A56B0370F3A8"
+                  Key="Installer\Products\75E3CA1D72467484D8075AB630073F8A"
                   Name="ProductName"
                   Type="raw" />
     </Property>
     <Property Id="IGNORE_SGW1x_CHECK" Value="false"/>
     <!-- option to bypass check of previous version of SGW installation -->
     <Condition Message="An older version of Couchbase Sync Gateway has been detected on your computer. To complete the installation of this version, please uninstall your older version before you continue.">
-    <![CDATA[NOT SYNC_GATEWAY_NAME_1X_EXISTS]]>
+    <![CDATA[Installed OR SYNC_GATEWAY_NAME_1X_EXISTS]]>
     </Condition>
     <!--<![CDATA[(NOT SYNC_GATEWAY_NAME_1X_EXISTS) OR IGNORE_SGW1x_CHECK]]> -->
 
