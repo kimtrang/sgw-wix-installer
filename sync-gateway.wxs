@@ -26,8 +26,9 @@
     <Property Id="IGNORE_SGW1x_CHECK" Value="false"/>
     <!-- option to bypass check of previous version of SGW installation -->
     <Condition Message="An older version of Couchbase Sync Gateway has been detected on your computer. To complete the installation of this version, please uninstall your older version before you continue.">
-    <![CDATA[(NOT SYNC_GATEWAY_NAME_1X_EXISTS) OR IGNORE_SGW1x_CHECK]]>
+    <![CDATA[SYNC_GATEWAY_NAME_1X_EXISTS]]>
     </Condition>
+    <!--<![CDATA[(NOT SYNC_GATEWAY_NAME_1X_EXISTS) OR IGNORE_SGW1x_CHECK]]> -->
 
     <!-- Enable Windows Installer "major upgrade", the uninstall/install kind. -->
     <!-- The Schedule attribute specifies where RemoveExistingProducts will go; -->
